@@ -6,11 +6,9 @@ import java.util.List;
 
 /**
  *
- * @author ibena
+ * @author iben
  */
 public class Calculator {
-
-    private OrderMapper mapper;
 
     /**
      * This method returns the number of posts needed to make the input carport.
@@ -137,21 +135,21 @@ public class Calculator {
     /**
      * This method returns a list of all material needed for the input carport.
      */
-    public static List<Material> getAllMaterial(Carport carport) {
+    public static List<Material> getAllMaterial(Carport carport) throws FogException {
         List material = new ArrayList<>();
 
         /* Get name and price from sql database */
-        Material posts = new Material("posts", getAllPosts(carport),"pcs", 24.95);
-        Material wood = new Material("wood boards", getSides(carport) + getRoof(carport),"pcs",4.50);
-        Material roofBattens = new Material("roof battens", getRoofBattens(carport),"cm", 9.95/100);
-        Material sideBattens = new Material("side battens", getSideBattens(carport),"cm", 9.95/100);
-        Material screws = new Material("screws", getScrews(carport),"pcs", 0.10);
+        Material post = new Material("post", getAllPosts(carport),"pcs", LogicFacade.getMaterialPrice("post"));
+        Material wood = new Material("wood board", getSides(carport) + getRoof(carport),"pcs", LogicFacade.getMaterialPrice("wood board"));
+        Material roofBatten = new Material("roof batten", getRoofBattens(carport)/100,"m", LogicFacade.getMaterialPrice("roof batten"));
+        Material sideBatten = new Material("side batten", getSideBattens(carport)/100,"m", LogicFacade.getMaterialPrice("side batten"));
+        Material screw = new Material("screw", getScrews(carport),"pcs", LogicFacade.getMaterialPrice("screw"));
         
-        material.add(posts);
+        material.add(post);
         material.add(wood);
-        material.add(roofBattens);
-        material.add(sideBattens);
-        material.add(screws);
+        material.add(roofBatten);
+        material.add(sideBatten);
+        material.add(screw);
         
         return material;
     }
@@ -160,7 +158,7 @@ public class Calculator {
      * This method returns the total price of the input carport. Material prices
      * are in the database.
      */
-    public static double getTotalPrice(Carport carport) {
+    public static double getTotalPrice(Carport carport) throws FogException {
         List<Material> materials = getAllMaterial(carport);
         
         double totalPrice = 0;
@@ -170,8 +168,8 @@ public class Calculator {
             totalItemPrice = materials.get(i).getPrice() * materials.get(i).getQty();
             totalPrice += totalItemPrice;
         }
-        
-        return totalPrice;
+         
+        return Double.parseDouble(String.format("%.2f",totalPrice));
     }
 
 }
