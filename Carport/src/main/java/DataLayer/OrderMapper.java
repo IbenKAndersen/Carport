@@ -19,16 +19,16 @@ import java.util.List;
  */
 public class OrderMapper {
 
-    public static void makeOrder( Carport carport, Customer customer ) throws FogException {
-        try {
-            Connection con = Connector.connection();
-            String SQL = "INSERT INTO orders (details, price) VALUES (?, ?)";
-            PreparedStatement ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
-            ps.setString( 1, carport.getDetails() );
-            ps.setInt( 2, carport.getPrice() );
-            ps.executeUpdate();
-        } catch ( SQLException ex ) {
-            throw new FogException( ex.getMessage() );
-        }
-    }
+//    public static void makeOrder( Carport carport, Customer customer ) throws FogException {
+//        try {
+//            Connection con = Connector.connection();
+//            String SQL = "INSERT INTO orders (details, price) VALUES (?, ?)";
+//            PreparedStatement ps = con.prepareStatement( SQL, Statement.RETURN_GENERATED_KEYS );
+//            ps.setString( 1, carport.getDetails() );
+//            ps.setInt( 2, carport.getPrice() );
+//            ps.executeUpdate();
+//        } catch ( SQLException ex ) {
+//            throw new FogException( ex.getMessage() );
+//        }
+//    }
 }

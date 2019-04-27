@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package LogicLayer;
 
 /**
  *
- * @author Benjamin
+ * @author ibenk
  */
 public class Carport {
     
@@ -15,13 +10,15 @@ public class Carport {
     private final int length; //measured in centimeters.
     private final int width; //measured in centimeters.
     private final boolean toolshed; //false when toolshed is not opted
+    private final boolean pointyRoof; //false when roof is not pointy
     private final String details; //details on carport
 
-    public Carport(int height, int length, int width, boolean toolshed, String details) {
+    public Carport(int height, int length, int width, boolean toolshed, boolean pointyRoof, String details) {
         this.height = height;
         this.length = length;
         this.width = width;
         this.toolshed = toolshed;
+        this.pointyRoof = pointyRoof;
         this.details = details;
     }
     
@@ -30,6 +27,7 @@ public class Carport {
         this.length = length;
         this.width = width;
         toolshed = false;
+        pointyRoof = false;
         details = "";
     }
 
@@ -45,19 +43,21 @@ public class Carport {
         return width;
     }
     
+    public boolean hasToolshed() {
+        return toolshed;
+    }
+
+    public boolean hasPointyRoof() {
+        return pointyRoof;
+    }
     
     public String getDetails() {
         return details;
     }
 
-
-    public boolean hasToolshed() {
-        return toolshed;
-    }
-
     @Override
     public String toString() {
-        return "Carport{" + "toolshed=" + toolshed + ", details=" + details;
+        return "Carport ";
     }
     
 }

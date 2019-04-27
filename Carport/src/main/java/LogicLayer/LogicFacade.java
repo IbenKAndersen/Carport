@@ -11,12 +11,12 @@ import java.util.List;
  */
 public class LogicFacade {
 
-    public static List<Carport> getOrders( int id ) throws FogException, ClassNotFoundException  {
-        return OrderMapper.getStandard();
-    }
+//    public static List<Carport> getOrders( int id ) throws FogException, ClassNotFoundException  {
+//        return OrderMapper.getStandard();
+//    }
     
-    public static void createOrder( Carport carport, Customer customer ) throws FogException {
-        OrderMapper.makeOrder(carport, customer);
-    }
+//    public static void createOrder( Carport carport, Customer customer ) throws FogException {
+//        OrderMapper.makeOrder(carport, customer);
+//    }
     
 }

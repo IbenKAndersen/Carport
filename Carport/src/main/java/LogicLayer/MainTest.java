@@ -9,10 +9,13 @@ public class MainTest {
     public static void main(String[] args) {
     
         /* Test carport with height, length, width */
-        Carport carport = new Carport(225, 400, 200);
+        Carport carport = new Carport(230, 420, 170);
         
-        Calculator.getPosts(carport);
-        //Calculator.getRoof(carport);
+        //This works
+        //System.out.println(Calculator.getPosts(carport));
+        
+        //This works
+        System.out.println(Calculator.getRoof(carport));
         
         
     }
