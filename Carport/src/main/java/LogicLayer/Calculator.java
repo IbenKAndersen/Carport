@@ -137,10 +137,21 @@ public class Calculator {
     /**
      * This method returns a list of all material needed for the input carport.
      */
-    public static List getAllMaterial(Carport carport) {
+    public static List<Material> getAllMaterial(Carport carport) {
         List material = new ArrayList<>();
 
+        /* Get name and price from sql database */
+        Material posts = new Material("posts", getAllPosts(carport),"pcs", 24.95);
+        Material wood = new Material("wood boards", getSides(carport) + getRoof(carport),"pcs",4.50);
+        Material roofBattens = new Material("roof battens", getRoofBattens(carport),"cm", 9.95/100);
+        Material sideBattens = new Material("side battens", getSideBattens(carport),"cm", 9.95/100);
+        Material screws = new Material("screws", getScrews(carport),"pcs", 0.10);
         
+        material.add(posts);
+        material.add(wood);
+        material.add(roofBattens);
+        material.add(sideBattens);
+        material.add(screws);
         
         return material;
     }
@@ -150,8 +161,17 @@ public class Calculator {
      * are in the database.
      */
     public static double getTotalPrice(Carport carport) {
-
-        return 0;
+        List<Material> materials = getAllMaterial(carport);
+        
+        double totalPrice = 0;
+        double totalItemPrice;
+        
+        for (int i = 0; i < materials.size(); i++) {
+            totalItemPrice = materials.get(i).getPrice() * materials.get(i).getQty();
+            totalPrice += totalItemPrice;
+        }
+        
+        return totalPrice;
     }
 
 }
