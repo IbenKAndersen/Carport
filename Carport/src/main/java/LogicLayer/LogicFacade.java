@@ -1,4 +1,4 @@
-package FunctionLayer;
+package LogicLayer;
 
 import DataLayer.OrderMapper;
 import PresentationLayer.Order;

@@ -1,9 +1,9 @@
 package DataLayer;
 
 import DataLayer.Connector;
-import FunctionLayer.Carport;
-import FunctionLayer.Customer;
-import FunctionLayer.FogException;
+import LogicLayer.Carport;
+import LogicLayer.Customer;
+import LogicLayer.FogException;
 import PresentationLayer.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,28 +18,6 @@ import java.util.List;
  * @authors Iben, Christian, Benjamin, Nicklas, Mikkel
  */
 public class OrderMapper {
-
-    public static List<Carport> getStandard() throws FogException {
-        List<Carport> standards = new ArrayList<>();
-        try {
-            String SQL = "SELECT * FROM `fog`.`carport`;";
-
-            Connection con = Connector.connection();
-            PreparedStatement ps = con.prepareStatement( SQL );
-            ResultSet rs = ps.executeQuery(SQL);
-
-            while ( rs.next() ) {
-                String details = rs.getString("details");
-                int price = rs.getInt("price");
-                int id = rs.getInt("id");
-                Carport standard = new Carport(id, false, details, price);
-                standards.add(standard);
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-        return standards;
-    }
 
     public static void makeOrder( Carport carport, Customer customer ) throws FogException {
         try {

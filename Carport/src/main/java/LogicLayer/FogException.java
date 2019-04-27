@@ -1,4 +1,4 @@
-package FunctionLayer;
+package LogicLayer;
 
 /**
  * @author Iben, Christian, Benjamin, Nicklas, Mikkel

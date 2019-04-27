@@ -1,7 +1,7 @@
 package PresentationLayer;
 
-import FunctionLayer.Carport;
-import FunctionLayer.FogException;
+import LogicLayer.Carport;
+import LogicLayer.FogException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
