@@ -16,25 +16,27 @@ public class Calculator {
      * This method returns the number of posts needed to make the input carport.
      * Calculates for 1 longside, multiplies in the end and adds backside.
      */
-    public static int getPosts(Carport carport) {
+    public static int getAllPosts(Carport carport) {
         /* One side of the carport automatically has 1 post at each end */
         int auto = 2;
 
+        double postsOnWidth = Math.max(((double) carport.getWidth() / 100) - 1, 0);
+        int roundedWidth = (int) Math.ceil(postsOnWidth);
+
+        return ((auto + getPostsOnLongside(carport)) * 2) + roundedWidth;
+    }
+
+    /**
+     * This method returns the number of posts on 1 side of the input carport.
+     */
+    public static int getPostsOnLongside(Carport carport) {
         /* Dividing by 100 gives the number of spaces, by substracting 1 you get
         the number of splitters/poles between the poles in the ends.
         Math.max makes sure that posts cannot be negative. */
-        double postsOnLength = Math.max(( (double) carport.getLength() / 100) - 1, 0);        
-        
-        /* Making sure that you get a pole for each beginning meter */
-        int roundedLength = (int) Math.ceil(postsOnLength);
-        
-        double postsOnWidth = Math.max(( (double) carport.getWidth()/ 100) - 1, 0);
-        int roundedWidth = (int) Math.ceil(postsOnWidth);
-        
-        System.out.println(postsOnLength);
-        System.out.println(postsOnWidth);
+        double postsOnLength = Math.max(((double) carport.getLength() / 100) - 1, 0);
 
-        return ((auto + roundedLength) * 2) + roundedWidth;
+        /* Making sure that you get a pole for each beginning meter */
+        return (int) Math.ceil(postsOnLength);
     }
 
     /**
@@ -52,8 +54,8 @@ public class Calculator {
     }
 
     /**
-     * This method returns the number of wooden boards needed to make 1 side of
-     * the input carport. input1 is always the direction of the wooden board. --
+     * This method returns the number of wooden boards needed to make 1
+     * rectangle of wood. input1 is always the direction of the wooden board. --
      * At the roof input1 is the length and input2 is the width -- At the two
      * sides input1 is the length and input2 is the height -- At the backside
      * input1 is the width and input2 is the height
@@ -89,11 +91,47 @@ public class Calculator {
     }
 
     /**
+     * This method returns the number of wooden boards needed to make all sides
+     * of the input carport.
+     */
+    public static int getSides(Carport carport) {
+        int longsides = 2 * (calcRectangle(carport.getLength(), carport.getHeight()));
+        int backside = calcRectangle(carport.getWidth(), carport.getHeight());
+
+        return longsides + backside;
+    }
+
+    /**
+     * This method returns the number of centimeters in wooden battens needed
+     * across the roof. We put the battens where the posts is on the longside of
+     * the carport.
+     */
+    public static int getRoofBattens(Carport carport) {
+        return getPostsOnLongside(carport) * carport.getWidth();
+    }
+
+    /**
+     * This method returns the number of centimeters in wooden battens needed
+     * along the 2 sides of the roof.
+     */
+    public static int getSideBattens(Carport carport) {
+        return 2 * carport.getLength();
+    }
+
+    /**
      * This method returns the number of screws needed for 1 wooden board.
      */
     public static int getScrews(Carport carport) {
+        int screwsOnSides = getSides(carport) * 6;
+        int screwsOnRoof = getRoof(carport) * 6;
 
-        return 0;
+        /* The getBattens-method returns the number of meters in wooden battens
+        and not the number of battens. To get the number of screws we calculate 
+        the number of post on longside. We need 3 screws for each post for both 
+        the side battens and the roof battens in all 6 screws for each post*/
+        int screwsOnBattens = 2 * getPostsOnLongside(carport) * 6;
+
+        return screwsOnSides + screwsOnRoof + screwsOnBattens;
     }
 
     /**
@@ -102,6 +140,8 @@ public class Calculator {
     public static List getAllMaterial(Carport carport) {
         List material = new ArrayList<>();
 
+        
+        
         return material;
     }
 
